@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ "`nmcli n`" == "enabled" ]
+then
+	notify-send -i network-wireless-disconnected "Wireless" "Wireless disabled"
+	nmcli n off 
+else
+	notify-send -i network-wireless-connected "Wireless" "Wireless enabled"
+	nmcli n on
+fi
+

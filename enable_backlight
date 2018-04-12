@@ -1,0 +1,4 @@
+cd /sys/firmware/efi/efivars
+chattr -i KBDBacklitLvl-5af56f53-985c-47d5-920c-f1c531d06852
+echo 0700000004 | xxd -p -r > KBDBacklitLvl-5af56f53-985c-47d5-920c-f1c531d06852
+chattr +i KBDBacklitLvl-5af56f53-985c-47d5-920c-f1c531d06852

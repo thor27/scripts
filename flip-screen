@@ -1,0 +1,28 @@
+#!/bin/bash
+function is_inverted {
+    count=`xrandr | grep eDP-1 | grep -o inverted | wc -l`
+    [ $count == 2 ] && return 0 || return 1
+}
+
+function is_natural {
+    value=`xinput list-props 'SYN2602:00 06CB:2871 Touchpad' | grep 'libinput Natural Scrolling Enabled' | grep -v Default | cut -f3`
+    [ $value == 1 ] && return 0 || return 1
+}
+
+if is_inverted
+then
+    xrandr --output eDP-1 --rotate normal
+    xinput set-prop 'SYN2602:00 06CB:2871 Touchpad' 'Coordinate Transformation Matrix' 1 0 0 0 1 0 0 0 1
+    notify-send -i video-display "Notebook Screen State" "Normal"
+else
+    xrandr --output eDP-1 --rotate inverted
+    xinput set-prop 'SYN2602:00 06CB:2871 Touchpad' 'Coordinate Transformation Matrix' -1 0 1 0 -1 1 0 0 1
+    notify-send -i video-display "Notebook Screen State" "Inverted"
+fi
+
+if is_natural
+then
+    xinput set-prop 'SYN2602:00 06CB:2871 Touchpad' 'libinput Natural Scrolling Enabled' 0
+else
+    xinput set-prop 'SYN2602:00 06CB:2871 Touchpad' 'libinput Natural Scrolling Enabled' 1
+fi
