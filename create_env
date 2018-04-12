@@ -4,6 +4,6 @@ if [ "$1" == "2" ]
 then
   virtualenv $vpython_path
 else
-  python3 -m venv $vpython_path
+  python3.6 -m venv $vpython_path
 fi
 $vpython_path/bin/pip install flake8 ipython ipdb
