@@ -6,4 +6,5 @@ then
 else
   python3.6 -m venv $vpython_path
 fi
-$vpython_path/bin/pip install flake8 ipython ipdb
+$vpython_path/bin/pip install --upgrade pip
+$vpython_path/bin/pip install wheel flake8 ipython ipdb
