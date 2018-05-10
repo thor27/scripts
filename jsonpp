@@ -1,0 +1,3 @@
+read DATA
+printf "\n$DATA\n" | python -m json.tool | pygmentize -g
+
